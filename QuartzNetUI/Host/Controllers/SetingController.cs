@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Host.Controllers
 {
@@ -60,8 +61,15 @@ namespace Host.Controllers
         {
             if (mailData == null)
             {
-                var mail = await System.IO.File.ReadAllTextAsync(filePath);
-                mailData = JsonConvert.DeserializeObject<MailEntity>(mail);
+                if (System.IO.File.Exists(filePath))
+                {
+                    var mail = await System.IO.File.ReadAllTextAsync(filePath);
+                    mailData = JsonConvert.DeserializeObject<MailEntity>(mail);
+                }
+                else
+                {
+                    mailData = new MailEntity();
+                }
             }
             return mailData;
         }

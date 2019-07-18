@@ -63,9 +63,4 @@ export class LayoutComponent implements OnInit {
   jumpSeting() {
     this.router.navigate(['/seting']);
   }
-
-  //跳转到说明
-  jumpExplain() {
-    this.router.navigate(['/explain']);
-  }
 }
